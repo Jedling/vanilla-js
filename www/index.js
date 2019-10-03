@@ -1,36 +1,54 @@
-// Two ways to find the body element
-// (a shortcut: let body = document.body;)
+
 let body = document.querySelector('body');
- 
+let div = document.createElement('div');
+body.append(div);
 
-// let div = document.createElement('div');
-// div.innerHTML = 'Hej! Jag är en div.';
-// body.append(div);
+// Name
+let inputName = document.createElement('input');
+inputName.setAttribute('class', 'input');
+inputName.setAttribute('placeholder', 'namn')
+body.append(inputName);
+div.append(inputName);
 
-let input = document.createElement('input');
-body.append(input);
+// Phone
+let inputPhone = document.createElement('input');
+inputPhone.setAttribute('class', 'input');
+inputPhone.setAttribute('placeholder', 'telefon')
+body.append(inputPhone);
+div.append(inputPhone);
 
-input.setAttribute('class', 'name-input');
+// Email
+let inputEmail = document.createElement('input');
+inputEmail.setAttribute('class', 'input');
+inputEmail.setAttribute('placeholder', 'e-post')
+body.append(inputEmail);
+div.append(inputEmail);
+
+// Submit
+let submit = document.createElement('button');
+submit.setAttribute('class', 'submit-contact');
+submit.innerHTML = 'Lägg till kontakt'
+submit.setAttribute('placeholder', 'Lägg Till');
+body.append(submit);
 
 
-
-// // Create another element - a p-tag
-// let p = document.createElement('p');
-// p.innerHTML = 'Hi! I am a p-tag!';
-// div.append(p);
  
 // You can also remove an element from the dom
-p.remove();
+// p.remove();
  
 // And put it back
-div.before(p);
+// div.before(p);
  
-// another div tag
-// let div2 = document.createElement('div');
-// div2.innerHTML = 'I am another div!';
-// body.append(div2);
+// Eventhanterare
+
+window.addEventListener('click', e => {
+
+  if (e.target.closest('.name-input')) {
+    console.log("klickat på namn input");
+  }
  
-// let's set some attribute
-// div2.setAttribute('class', 'fine-div');
-// you can also read an attribute
-// console.log(div2.getAttribute('class'));
+  if (e.target.closest('button')) {
+    console.log("You clicked a button tag");
+  }
+ 
+});
