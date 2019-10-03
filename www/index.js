@@ -73,13 +73,13 @@ const userPrototype = {
     },
 };
 
-function User (value, email, phone ){
+function User (name, email, phone ){
   // make a new instance/object with
   // animlPrototype as its prototype
   let newInstance = Object.create(userPrototype);
   // fields that are different for each instance
   // need only be assigned here
-  newInstance.name = value;
+  newInstance.name = name;
   newInstance.email = email;
   newInstance.phone = phone;
   return newInstance;
