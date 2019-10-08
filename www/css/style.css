@@ -1,4 +1,4 @@
-.input-field {
+.name-input, .phone-input, .email-input {
   border-color: brown;
   border-radius: 10px;
 
@@ -6,13 +6,14 @@
   margin: 5px;
 }
 
-.submit-contact {
+.submit-btn {
   background-color: white;
   border-radius: 10px;
   border: 2px solid brown;
   padding: 10px;
   margin: 5px;
 }
-.submit-contact :hover {
-  background-color: lightsalmon;
+
+h2 {
+  font-size: 60px;
 }
