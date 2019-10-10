@@ -5,13 +5,14 @@ class Form extends App {
   }
   addForm() {
     let div = document.createElement("div");
+    div.setAttribute('class', 'form');
     let body = document.querySelector("body");
-    let headerDiv = document.createElement("div");
-
+    
     // Header
-    headerDiv.setAttribute("class", "header");
-    headerDiv.innerHTML = "Kontakter";
-    body.append(headerDiv);
+    // let headerDiv = document.createElement("div");
+    // headerDiv.setAttribute("class", "header");
+    // headerDiv.innerHTML = "Kontakter";
+    // div.append(headerDiv);
     body.append(div);
 
     // Name input
@@ -31,6 +32,7 @@ class Form extends App {
     // Phone
     const phoneDiv = document.createElement("div");
     phoneDiv.setAttribute("class", "phone-div input-div");
+    phoneDiv.setAttribute("type", 'text');
     let inputPhone = document.createElement("input");
     inputPhone.setAttribute("class", "phone-input");
     inputPhone.setAttribute("type", "text");
@@ -58,7 +60,7 @@ class Form extends App {
     inputEmail.setAttribute("class", "email-input");
     inputEmail.setAttribute("type", "text");
     inputEmail.setAttribute("value", "");
-    inputEmail.setAttribute("id", "email");
+    inputEmail.setAttribute("id", "e-post");
     inputEmail.setAttribute("placeholder", "e-post");
     // body.append(inputEmail);
     emailDiv.append(inputEmail);
@@ -66,10 +68,12 @@ class Form extends App {
 
     // Add email
     let addEmail = document.createElement("button");
-    addEmail.setAttribute("id", "add-email");
+    addEmail.setAttribute("class", "add-email");
     addEmail.setAttribute("type", "text");
     addEmail.innerHTML = "+";
     emailDiv.append(addEmail);
+    let br2 = document.createElement('br');
+    emailDiv.append(br2)
     div.append(emailDiv);
 
     // Submit
