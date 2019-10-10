@@ -1,0 +1,17 @@
+table {
+  border: 2px solid green;
+}
+thead {
+  background-color: pink;
+  padding: 20px;
+}
+th {
+  padding: 20px;
+}
+tr {
+  padding: 20px;
+}
+
+td {
+  color: grey;
+}
