@@ -34,10 +34,10 @@ class Contacts extends App {
       td.innerText = contact.name;
 
       let td2 = document.createElement('td');
-      td2.innerText = contact.email;
+      td2.innerText = contact.email.join('\n');
 
       let td3 = document.createElement('td');
-      td3.innerText = contact.phone;
+      td3.innerText = contact.phone.join('\n');
 
       tr.append(td);
       tr.append(td2);
