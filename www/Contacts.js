@@ -13,7 +13,7 @@ class Contacts extends App {
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tr = document.createElement('tr');
-    
+
     let th = document.createElement('th');
     th.innerText = 'Namn';
     let th2 = document.createElement('th');
@@ -43,6 +43,7 @@ class Contacts extends App {
       tr.append(td2);
       tr.append(td3);
       tbody.append(tr);
+      
     });
     table.append(tbody);
     div.append(table);
