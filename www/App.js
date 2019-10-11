@@ -7,18 +7,21 @@ class App {
 
     this.form = new Form();
     this.contacts = new Contacts();
+    this.contact = new Contact();
   }
   listen() {
     window.addEventListener("click", e => {
       if (e.target.closest("#save-contact")) this.saveContact();
       if (e.target.closest(".add-phone")) this.addPhone();
       if (e.target.closest(".add-email")) this.addEmail();
+      if (e.target.closest(".edit")) this.editButton();
     });
   }
   addPhone() {
     const phoneDiv = document.querySelector("div.phone-div");
     const input = document.createElement("input");
     input.setAttribute("placeholder", "Telefon");
+
     let inputVal = document.querySelectorAll('input[type="text"]');
     console.log(inputVal);
 
@@ -37,13 +40,21 @@ class App {
     let br = document.createElement("br");
     emailDiv.append(br);
   }
+  editButton() {
+// let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
+    document.querySelector("div.form").innerHTML = "";
+    document.querySelector("div.added-contacts").innerHTML = "";
+    let person = localStorage.getItem('contacts');
+    console.log(person);
+    this.contact = new Contact().editContact();
+    }
 
   saveContact() {
     // let inputValues = document.querySelectorAll('input[type="text"]');
     let inputName = document.querySelector("input#name").value;
     let inputPhone = document.querySelector("div.phone-div").children;
     let inputEmail = document.querySelector("div.email-div").children;
-console.log(inputPhone)
+
     let filteredPhone = [].filter
       .call(inputPhone, element => {
         return element.tagName === "INPUT";
@@ -76,7 +87,7 @@ console.log(inputPhone)
       name: inputName,
       phone: filteredPhone,
       email: filteredEmail
-    }
+    };
 
     contacts.push(data);
     contacts.forEach((contact, i) => {
