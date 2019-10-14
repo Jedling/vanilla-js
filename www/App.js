@@ -14,7 +14,7 @@ class App {
       if (e.target.closest("#save-contact")) this.saveContact();
       if (e.target.closest(".add-phone")) this.addPhone();
       if (e.target.closest(".add-email")) this.addEmail();
-      if (e.target.closest(".edit")) this.editButton();
+      if (e.target.closest(".edit")) this.editButton(e.target.getAttribute('data-contactid'));
     });
   }
   addPhone() {
@@ -40,13 +40,14 @@ class App {
     let br = document.createElement("br");
     emailDiv.append(br);
   }
-  editButton() {
+  editButton(id) {
 // let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
     document.querySelector("div.form").innerHTML = "";
     document.querySelector("div.added-contacts").innerHTML = "";
-    let person = localStorage.getItem('contacts');
-    console.log(person);
+    // let person = localStorage.getItem('contacts');
+    // console.log(person);
     this.contact = new Contact().editContact();
+    console.log(id)
     }
 
   saveContact() {

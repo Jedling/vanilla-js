@@ -50,6 +50,7 @@ class Contacts extends App {
       let td4 = document.createElement("td");
       let edit = document.createElement("button");
       edit.setAttribute("class", "edit");
+      edit.setAttribute('data-contactid', contact.id)
       edit.setAttribute("value", "");
       edit.innerHTML = "Redigera";
 

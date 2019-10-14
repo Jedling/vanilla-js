@@ -4,37 +4,37 @@ class Contact extends App {
 
   }
   editContact() {
-   
-    // let div = document.createElement("div");
-    // div.setAttribute("class", "added-contacts");
+  
+    let div = document.createElement("div");
+    div.setAttribute("class", "added-contacts");
 
-    // let body = document.querySelector("body");
-    // body.append(div);
+    let body = document.querySelector("body");
+    body.append(div);
 
-    // let table = document.createElement("table");
-    // let thead = document.createElement("thead");
-    // let tr = document.createElement("tr");
+    let table = document.createElement("table");
+    let thead = document.createElement("thead");
+    let tr = document.createElement("tr");
 
-    // let th = document.createElement("th");
-    // th.innerText = "Namn";
+    let th = document.createElement("th");
+    th.innerText = "Namn";
 
-    // let th2 = document.createElement("th");
-    // th2.innerText = "Email";
+    let th2 = document.createElement("th");
+    th2.innerText = "Email";
 
-    // let th3 = document.createElement("th");
-    // th3.innerText = "Telefon";
+    let th3 = document.createElement("th");
+    th3.innerText = "Telefon";
     
-    // let th4 = document.createElement("th");
-    // th4.innerText = "Redigera";
+    let th4 = document.createElement("th");
+    th4.innerText = "Redigera";
 
-    // tr.append(th);
-    // tr.append(th2);
-    // tr.append(th3);
-    // tr.append(th4);
-    // thead.append(tr);
-    // table.append(thead);
+    tr.append(th);
+    tr.append(th2);
+    tr.append(th3);
+    tr.append(th4);
+    thead.append(tr);
+    table.append(thead);
 
-    // let tbody = document.createElement("tbody");
+    let tbody = document.createElement("tbody");
 
 
 
@@ -63,7 +63,7 @@ class Contact extends App {
     // //   tr.append(td4);
     // //   tbody.append(tr);
     // // });
-    // table.append(tbody);
-    // div.append(table);
+    table.append(tbody);
+    div.append(table);
   }
 }
