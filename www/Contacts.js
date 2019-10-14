@@ -53,11 +53,11 @@ class Contacts extends App {
       td3.innerText = contact.phone.join("\n");
 
       let td4 = document.createElement("td");
-      let edit = document.createElement("button");
-      edit.setAttribute("class", "edit");
-      edit.setAttribute('data-contactid', contact.id)
-      edit.setAttribute("value", "");
-      edit.innerHTML = "Visa kontakt";
+      let view = document.createElement("button");
+      view.setAttribute("class", "view-contact");
+      view.setAttribute('data-contactid', contact.id)
+      view.setAttribute("value", "");
+      view.innerHTML = "Visa kontakt";
 
       let td5 = document.createElement("td");
       let remove = document.createElement("button");
@@ -67,7 +67,7 @@ class Contacts extends App {
       remove.innerHTML = "X";
 
       td5.append(remove);
-      td4.append(edit);
+      td4.append(view);
       tr.append(td);
       tr.append(td2);
       tr.append(td3);

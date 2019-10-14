@@ -8,16 +8,24 @@ class App {
     this.form = new Form();
     this.contacts = new Contacts();
     this.contact = new Contact();
+    // this.updateForm = new UpdateForm();
   }
   listen() {
     window.addEventListener("click", e => {
       if (e.target.closest("#save-contact")) this.saveContact();
+
       if (e.target.closest(".add-phone")) this.addPhone();
+
       if (e.target.closest(".add-email")) this.addEmail();
-      if (e.target.closest(".edit"))
+
+      if (e.target.closest(".view-contact"))
         this.getContact(e.target.getAttribute("data-contactid"));
+
       if (e.target.closest(".remove-contact"))
         this.deleteButton(e.target.getAttribute("data-contactid"));
+
+      if (e.target.closest(".edit"))
+        this.editButton(e.target.getAttribute("data-contactid"));
     });
   }
   addPhone() {
@@ -62,6 +70,12 @@ class App {
     this.contacts = new Contacts();
     console.log(contact);
     console.log("ta bort mig");
+  }
+  editButton(id){
+    // let header = document.createElement('h2');
+    // header.setAttribute('class', 'edit-header')
+    this.updateContact = new UpdateContact(Number(id)).updateForm();
+    console.log('uppdatera')
   }
   saveContact() {
     // let inputValues = document.querySelectorAll('input[type="text"]');

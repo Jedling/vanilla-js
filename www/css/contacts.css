@@ -1,7 +1,7 @@
 .added-contacts {
   margin: 0 auto;
 }
-.edit, .remove-contact {
+.edit, .remove-contact, .view-contact {
   background-color: pink;
   border-radius: 5px;
   color: grey;

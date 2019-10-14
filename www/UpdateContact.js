@@ -1,9 +1,15 @@
-class Form extends App {
-  constructor() {
+class UpdateContact extends App {
+  constructor(id) {
     super();
-    this.addForm();
+    this.updateForm();
+    this.id = id;
   }
-  addForm() {
+  updateForm() {
+    let allContacts = JSON.parse(localStorage.getItem("contacts"));
+    let contact = allContacts.find(contact => {
+      return contact.id === this.id;
+    });
+    console.log(contact)
     let div = document.createElement("div");
     div.setAttribute('class', 'form');
     let body = document.querySelector("body");
@@ -80,7 +86,7 @@ class Form extends App {
     let submit = document.createElement("button");
     submit.setAttribute("class", "submit-btn");
     submit.setAttribute("id", "save-contact");
-    submit.innerHTML = "Lägg till kontakt";
+    submit.innerHTML = "Uppdatera";
     div.append(submit);
 
     // let addedContacts = document.createElement("h2");

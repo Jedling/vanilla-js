@@ -8,7 +8,7 @@ class Contact extends App {
     let contact = allContacts.find(contact => {
       return contact.id === this.id;
     });
-    console.log(contact);
+
     let div = document.createElement("div");
     div.setAttribute("class", "added-contacts");
 
@@ -40,10 +40,7 @@ class Contact extends App {
 
     let tbody = document.createElement("tbody");
 
-    //   contact.id === id
-    //   console.log(contact.id)
-    //   if(contact === id){
-
+    
     tr = document.createElement("tr");
     let td = document.createElement("td");
     td.innerText = contact.name;
@@ -57,6 +54,7 @@ class Contact extends App {
     let td4 = document.createElement("td");
     let edit = document.createElement("button");
     edit.setAttribute("class", "edit");
+    edit.setAttribute('data-contactid', contact.id);
     edit.setAttribute("value", "");
     edit.innerHTML = "Redigera";
 
@@ -70,7 +68,5 @@ class Contact extends App {
     table.append(tbody);
     div.append(table);
   }
-  editContact(){
-    
-  }
+
 }
