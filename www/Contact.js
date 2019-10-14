@@ -1,10 +1,15 @@
 class Contact extends App {
-  constructor() {
+  constructor(id) {
     super();
-
+    this.id = id;
   }
   editContact() {
-  
+    let allContacts = JSON.parse(localStorage.getItem('contacts'));
+    console.log(allContacts)
+    let contact = allContacts.find(contact => {
+      return contact.id === this.id;
+    })
+    console.log(contact);
     let div = document.createElement("div");
     div.setAttribute("class", "added-contacts");
 
@@ -38,31 +43,34 @@ class Contact extends App {
 
 
 
-    
-    // // contacts.forEach(contact => {
-    // //   let tr = document.createElement("tr");
-    // //   let td = document.createElement("td");
-    // //   td.innerText = contact.name;
+    //   contact.id === id
+    //   console.log(contact.id)
+    //   if(contact === id){
 
-    // //   let td2 = document.createElement("td");
-    // //   td2.innerText = contact.email.join("\n");
+      
+      tr = document.createElement("tr");
+      let td = document.createElement("td");
+      td.innerText = contact.name;
 
-    // //   let td3 = document.createElement("td");
-    // //   td3.innerText = contact.phone.join("\n");
+      let td2 = document.createElement("td");
+      td2.innerText = contact.email.join("\n");
 
-    // //   let td4 = document.createElement("td");
-    // //   let edit = document.createElement("button");
-    // //   edit.setAttribute("class", "edit");
-    // //   edit.setAttribute("value", "");
-    // //   edit.innerHTML = "Redigera";
+      let td3 = document.createElement("td");
+      td3.innerText = contact.phone.join("\n");
 
-    // //   td4.append(edit);
-    // //   tr.append(td);
-    // //   tr.append(td2);
-    // //   tr.append(td3);
-    // //   tr.append(td4);
-    // //   tbody.append(tr);
-    // // });
+      let td4 = document.createElement("td");
+      let edit = document.createElement("button");
+      edit.setAttribute("class", "edit");
+      edit.setAttribute("value", "");
+      edit.innerHTML = "Redigera";
+
+      td4.append(edit);
+      tr.append(td);
+      tr.append(td2);
+      tr.append(td3);
+      tr.append(td4);
+      tbody.append(tr);
+      
     table.append(tbody);
     div.append(table);
   }
