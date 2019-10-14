@@ -46,7 +46,7 @@ class App {
     document.querySelector("div.added-contacts").innerHTML = "";
     // let person = localStorage.getItem('contacts');
     // console.log(person);
-    this.contact = new Contact().editContact();
+    this.contact = new Contact(parseInt(id)).editContact();
     console.log(id)
     }
 
