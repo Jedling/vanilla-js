@@ -24,12 +24,16 @@ class Contacts extends App {
     th3.innerText = "Telefon";
 
     let th4 = document.createElement("th");
-    th4.innerText = "Redigera";
+    th4.innerText = "Visa Kontakt";
+
+    let th5 = document.createElement('th');
+    th5.innerText = 'Ta bort'
 
     tr.append(th);
     tr.append(th2);
     tr.append(th3);
     tr.append(th4);
+    tr.append(th5);
     thead.append(tr);
     table.append(thead);
 
@@ -39,6 +43,7 @@ class Contacts extends App {
       let tr = document.createElement("tr");
       let td = document.createElement("td");
       tr.setAttribute('data-contactid', contact.id);  
+      tr.setAttribute('class', 'tr-row')
       td.innerText = contact.name ;
 
       let td2 = document.createElement("td");
@@ -52,13 +57,22 @@ class Contacts extends App {
       edit.setAttribute("class", "edit");
       edit.setAttribute('data-contactid', contact.id)
       edit.setAttribute("value", "");
-      edit.innerHTML = "Redigera";
+      edit.innerHTML = "Visa kontakt";
 
+      let td5 = document.createElement("td");
+      let remove = document.createElement("button");
+      remove.setAttribute("class", "remove-contact");
+      remove.setAttribute('data-contactid', contact.id)
+      remove.setAttribute("value", "");
+      remove.innerHTML = "X";
+
+      td5.append(remove);
       td4.append(edit);
       tr.append(td);
       tr.append(td2);
       tr.append(td3);
       tr.append(td4);
+      tr.append(td5);
       tbody.append(tr);
     });
     table.append(tbody);

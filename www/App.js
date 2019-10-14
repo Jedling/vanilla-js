@@ -14,7 +14,10 @@ class App {
       if (e.target.closest("#save-contact")) this.saveContact();
       if (e.target.closest(".add-phone")) this.addPhone();
       if (e.target.closest(".add-email")) this.addEmail();
-      if (e.target.closest(".edit")) this.editButton(e.target.getAttribute('data-contactid'));
+      if (e.target.closest(".edit"))
+        this.getContact(e.target.getAttribute("data-contactid"));
+      if (e.target.closest(".remove-contact"))
+        this.deleteButton(e.target.getAttribute("data-contactid"));
     });
   }
   addPhone() {
@@ -40,16 +43,26 @@ class App {
     let br = document.createElement("br");
     emailDiv.append(br);
   }
-  editButton(id) {
-// let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
+  getContact(id) {
+    // let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
     document.querySelector("div.form").innerHTML = "";
     document.querySelector("div.added-contacts").innerHTML = "";
     // let person = localStorage.getItem('contacts');
     // console.log(person);
-    this.contact = new Contact(parseInt(id)).editContact();
-    console.log(id)
-    }
-
+    this.contact = new Contact(parseInt(id)).showContact();
+    console.log(id);
+  }
+  deleteButton(id) {
+    let contact = contacts.find(contact => {
+      return contact.id === Number(id);
+    });
+    contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
+    contacts.save();
+    document.querySelector("div.added-contacts").outerHTML = "";
+    this.contacts = new Contacts();
+    console.log(contact);
+    console.log("ta bort mig");
+  }
   saveContact() {
     // let inputValues = document.querySelectorAll('input[type="text"]');
     let inputName = document.querySelector("input#name").value;
@@ -71,29 +84,15 @@ class App {
       .map(input => {
         return input.value;
       });
-    console.log(inputName);
-    console.log(filteredEmail);
-    console.log(filteredPhone);
-
-    // const data = [].reduce.call(
-    //   inputName,
-    //   (acc, cur) => {
-    //     acc[cur.id] = cur.value;
-    //     return acc;
-    //   },
-    //   {}
-    // );
 
     const data = {
       name: inputName,
       phone: filteredPhone,
-      email: filteredEmail
+      email: filteredEmail,
+      id: Date.now()
     };
 
     contacts.push(data);
-    contacts.forEach((contact, i) => {
-      contact.id = i + 1;
-    });
     console.log(contacts);
     contacts.save();
 

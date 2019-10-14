@@ -3,12 +3,11 @@ class Contact extends App {
     super();
     this.id = id;
   }
-  editContact() {
-    let allContacts = JSON.parse(localStorage.getItem('contacts'));
-    console.log(allContacts)
+  showContact() {
+    let allContacts = JSON.parse(localStorage.getItem("contacts"));
     let contact = allContacts.find(contact => {
       return contact.id === this.id;
-    })
+    });
     console.log(contact);
     let div = document.createElement("div");
     div.setAttribute("class", "added-contacts");
@@ -28,7 +27,7 @@ class Contact extends App {
 
     let th3 = document.createElement("th");
     th3.innerText = "Telefon";
-    
+
     let th4 = document.createElement("th");
     th4.innerText = "Redigera";
 
@@ -41,37 +40,37 @@ class Contact extends App {
 
     let tbody = document.createElement("tbody");
 
-
-
     //   contact.id === id
     //   console.log(contact.id)
     //   if(contact === id){
 
-      
-      tr = document.createElement("tr");
-      let td = document.createElement("td");
-      td.innerText = contact.name;
+    tr = document.createElement("tr");
+    let td = document.createElement("td");
+    td.innerText = contact.name;
 
-      let td2 = document.createElement("td");
-      td2.innerText = contact.email.join("\n");
+    let td2 = document.createElement("td");
+    td2.innerText = contact.email.join("\n");
 
-      let td3 = document.createElement("td");
-      td3.innerText = contact.phone.join("\n");
+    let td3 = document.createElement("td");
+    td3.innerText = contact.phone.join("\n");
 
-      let td4 = document.createElement("td");
-      let edit = document.createElement("button");
-      edit.setAttribute("class", "edit");
-      edit.setAttribute("value", "");
-      edit.innerHTML = "Redigera";
+    let td4 = document.createElement("td");
+    let edit = document.createElement("button");
+    edit.setAttribute("class", "edit");
+    edit.setAttribute("value", "");
+    edit.innerHTML = "Redigera";
 
-      td4.append(edit);
-      tr.append(td);
-      tr.append(td2);
-      tr.append(td3);
-      tr.append(td4);
-      tbody.append(tr);
-      
+    td4.append(edit);
+    tr.append(td);
+    tr.append(td2);
+    tr.append(td3);
+    tr.append(td4);
+    tbody.append(tr);
+
     table.append(tbody);
     div.append(table);
+  }
+  editContact(){
+    
   }
 }

@@ -1,7 +1,7 @@
 .added-contacts {
   margin: 0 auto;
 }
-.edit {
+.edit, .remove-contact {
   background-color: pink;
   border-radius: 5px;
   color: grey;
@@ -13,6 +13,9 @@ table {
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border-radius: 5px;
 }
+.tr-row:hover {
+  background-color: rgb(231, 228, 228);
+  }
 thead {
   background-color: pink;
   padding: 20px;
@@ -27,9 +30,11 @@ th {
 }
 tr {
   padding: 20px;
+  /* background-color: rgb(231, 228, 228); */
 }
 
 td {
   padding: 5px;
   color: grey;
+  /* background-color: rgb(231, 228, 228); */
 }
