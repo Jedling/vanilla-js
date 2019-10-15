@@ -14,6 +14,10 @@ class Form extends App {
     // headerDiv.innerHTML = "Kontakter";
     // div.append(headerDiv);
     body.append(div);
+    let h2 = document.createElement('h2');
+    h2.setAttribute('class', 'contact-header')
+    h2.innerText = 'Kontaktlista'
+    div.append(h2)
 
     // Name input
     const nameDiv = document.createElement("div");
