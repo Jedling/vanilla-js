@@ -8,7 +8,6 @@ class App {
     this.form = new Form();
     this.contacts = new Contacts();
     this.contact = new Contact();
-    // this.updateForm = new UpdateForm();
   }
   listen() {
     window.addEventListener("click", e => {
@@ -103,7 +102,8 @@ class App {
       name: inputName,
       phone: filteredPhone,
       email: filteredEmail,
-      id: Date.now()
+      id: Date.now(),
+      history: []
     };
 
     contacts.push(data);
