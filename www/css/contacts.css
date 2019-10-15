@@ -14,6 +14,16 @@
   font-family: verdana;
   cursor: pointer;
 }
+.history-header, .contact-header {
+  font-size: 1.6rem;
+  color: grey;
+  font-family: verdana;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.contact-header {
+  margin-top: 25px;
+}
 table {
   /* border: 2px solid rgb(255, 155, 171); */
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -21,9 +31,14 @@ table {
   border-radius: 5px;
   margin: 0 auto;
   width: 600px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
-.tr-row {
+/* .tr-row {
   background-color: rgb(253, 247, 247);
+} */
+tbody > tr {
+  background-color: rgb(253, 247, 247)
 }
 thead {
   background-color: pink;
@@ -47,6 +62,9 @@ td {
   color: grey;
   /* background-color: rgb(231, 228, 228); */
 }
+/* .edit-th, .edit{
+  text-align: right;
+} */
 #save-contact,
 .add-email,
 .add-phone {
