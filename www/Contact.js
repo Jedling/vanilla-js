@@ -3,15 +3,16 @@ class Contact extends App {
     super();
     this.id = id;
     this.showContact();
+    this.showHistory();
   }
   showContact() {
     let contact = contacts.find(contact => {
       return contact.id === this.id;
-    })
-    let version = contact.history[0]
+    });
+    let version = contact.history[0];
 
     let div = document.createElement("div");
-    div.setAttribute("class", "added-contacts");
+    div.setAttribute("class", "added-contact");
 
     let body = document.querySelector("body");
     body.append(div);
@@ -41,7 +42,6 @@ class Contact extends App {
 
     let tbody = document.createElement("tbody");
 
-    
     tr = document.createElement("tr");
     let td = document.createElement("td");
     td.innerText = version.name;
@@ -55,7 +55,7 @@ class Contact extends App {
     let td4 = document.createElement("td");
     let edit = document.createElement("button");
     edit.setAttribute("class", "edit");
-    edit.setAttribute('data-contactid', contact.id);
+    edit.setAttribute("data-contactid", contact.id);
     edit.setAttribute("value", "");
     edit.innerHTML = "Redigera";
 
@@ -69,5 +69,81 @@ class Contact extends App {
     table.append(tbody);
     div.append(table);
   }
+  showHistory() {
+    let contact = contacts.find(contact => {
+      return contact.id === this.id;
+    }).history;
+    console.log(contact);
+    // const ulDiv = document.querySelector("div.ul-div");
+    // let ul = document.createElement('ul');
+    // let li = document.createElement('li');
+    // li.append(contact)
+    // ul.append(li);
+    // ulDiv.append(ul);
+    
+      
+    
+    let div = document.createElement("div");
+    div.setAttribute("class", "history");
 
+    let body = document.querySelector("body");
+    body.append(div);
+
+    let table = document.createElement("table");
+    let thead = document.createElement("thead");
+    thead.setAttribute('class', 'thead');
+    thead.innerText = 'Historik';
+    let tr = document.createElement("tr");
+
+    let th = document.createElement("th");
+    // th.setAttribute('class', 'history-th')
+    // th.innerText = "Historik";
+
+    // let th2 = document.createElement("th");
+    // th2.innerText = "Email";
+
+    // let th3 = document.createElement("th");
+    // th3.innerText = "Telefon";
+
+    // let th4 = document.createElement("th");
+    // th4.innerText = "Redigera";
+
+    tr.append(th);
+    // tr.append(th2);
+    // tr.append(th3);
+    // tr.append(th4);
+    
+    thead.append(tr);
+    table.append(thead);
+
+    let tbody = document.createElement("tbody");
+    contact.forEach(contact => {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    td.innerText = contact.name
+
+    let td2 = document.createElement("td");
+    td2.innerText = contact.email.join("\n");
+
+    let td3 = document.createElement("td");
+    td3.innerText = contact.phone.join("\n");
+
+    // let td4 = document.createElement("td");
+    // let edit = document.createElement("button");
+    // edit.setAttribute("class", "edit");
+    // edit.setAttribute("data-contactid", contact.id);
+    // edit.setAttribute("value", "");
+    // edit.innerHTML = "Redigera";
+
+    // td4.append(edit);
+    tr.append(td);
+    tr.append(td2);
+    tr.append(td3);
+    // tr.append(td4);
+    tbody.append(tr);
+  })
+    table.append(tbody);
+    div.append(table);
+    
+  }
 }

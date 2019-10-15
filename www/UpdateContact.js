@@ -80,4 +80,5 @@ class UpdateContact extends App {
     div.append(update);
 
   }
+
 }

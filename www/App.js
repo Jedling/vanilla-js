@@ -101,9 +101,8 @@ class App {
       phone: filteredPhone,
       email: filteredEmail
     });
-    console.log(contacts);
     contacts.save();
-    this.contact = new Contact(Number(id));
+    this.contact = new Contact()
  
   }
   saveContact() {
