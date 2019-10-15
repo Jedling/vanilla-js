@@ -42,7 +42,7 @@ class Contacts extends App {
     contacts.forEach(contact => {
       let tr = document.createElement("tr");
       let td = document.createElement("td");
-      tr.setAttribute('data-contactid', contact.id);  
+      // tr.setAttribute('data-contactid', contact.id);  
       tr.setAttribute('class', 'tr-row')
       td.innerText = contact.name ;
 
