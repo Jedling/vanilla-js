@@ -99,7 +99,7 @@ class App {
     contact.history.push({
       name: inputName,
       phone: filteredPhone,
-      email: filteredEmail
+      email: filteredEmail,
     });
     contacts.save();
     this.contact = new Contact()
