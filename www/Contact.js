@@ -17,6 +17,11 @@ class Contact extends App {
     let body = document.querySelector("body");
     body.append(div);
 
+    let h2 = document.createElement('h2');
+    h2.setAttribute('class', 'history-header')
+    h2.innerText = 'Nuvarande kontaktuppgifter'
+    div.append(h2)
+
     let table = document.createElement("table");
     let thead = document.createElement("thead");
     let tr = document.createElement("tr");
@@ -31,6 +36,7 @@ class Contact extends App {
     th3.innerText = "Telefon";
 
     let th4 = document.createElement("th");
+    th4.setAttribute('class', 'edit-th')
     th4.innerText = "Redigera";
 
     tr.append(th);
@@ -73,50 +79,50 @@ class Contact extends App {
     let contact = contacts.find(contact => {
       return contact.id === this.id;
     }).history;
-    console.log(contact);
-    // const ulDiv = document.querySelector("div.ul-div");
-    // let ul = document.createElement('ul');
-    // let li = document.createElement('li');
-    // li.append(contact)
-    // ul.append(li);
-    // ulDiv.append(ul);
-    
-      
-    
+ 
     let div = document.createElement("div");
     div.setAttribute("class", "history");
 
     let body = document.querySelector("body");
     body.append(div);
 
+    // History header
+    let h2 = document.createElement('h2');
+    h2.setAttribute('class', 'history-header')
+    h2.innerText = 'Historik'
+    div.append(h2)
+
+    // Table
     let table = document.createElement("table");
+
     let thead = document.createElement("thead");
     thead.setAttribute('class', 'thead');
-    thead.innerText = 'Historik';
     let tr = document.createElement("tr");
 
     let th = document.createElement("th");
-    // th.setAttribute('class', 'history-th')
-    // th.innerText = "Historik";
+    th.setAttribute('class', 'history-th')
+    th.innerText = "Telefon";
 
-    // let th2 = document.createElement("th");
-    // th2.innerText = "Email";
+    let th2 = document.createElement("th");
+    th2.innerText = "Email";
 
-    // let th3 = document.createElement("th");
-    // th3.innerText = "Telefon";
+    let th3 = document.createElement("th");
+    th3.innerText = "Telefon";
 
     // let th4 = document.createElement("th");
     // th4.innerText = "Redigera";
 
     tr.append(th);
-    // tr.append(th2);
-    // tr.append(th3);
+    tr.append(th2);
+    tr.append(th3);
     // tr.append(th4);
     
     thead.append(tr);
     table.append(thead);
 
     let tbody = document.createElement("tbody");
+
+    // contact loop
     contact.forEach(contact => {
     let tr = document.createElement("tr");
     let td = document.createElement("td");
@@ -128,22 +134,12 @@ class Contact extends App {
     let td3 = document.createElement("td");
     td3.innerText = contact.phone.join("\n");
 
-    // let td4 = document.createElement("td");
-    // let edit = document.createElement("button");
-    // edit.setAttribute("class", "edit");
-    // edit.setAttribute("data-contactid", contact.id);
-    // edit.setAttribute("value", "");
-    // edit.innerHTML = "Redigera";
-
-    // td4.append(edit);
     tr.append(td);
     tr.append(td2);
     tr.append(td3);
-    // tr.append(td4);
     tbody.append(tr);
   })
     table.append(tbody);
     div.append(table);
-    
   }
 }
