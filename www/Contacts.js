@@ -42,15 +42,14 @@ class Contacts extends App {
     contacts.forEach(contact => {
       let tr = document.createElement("tr");
       let td = document.createElement("td");
-      // tr.setAttribute('data-contactid', contact.id);  
       tr.setAttribute('class', 'tr-row')
-      td.innerText = contact.name ;
+      td.innerText = contact.history[0].name ;
 
       let td2 = document.createElement("td");
-      td2.innerText = contact.email.join("\n");
+      td2.innerText = contact.history[0].email.join("\n");
 
       let td3 = document.createElement("td");
-      td3.innerText = contact.phone.join("\n");
+      td3.innerText = contact.history[0].phone.join("\n");
 
       let td4 = document.createElement("td");
       let view = document.createElement("button");

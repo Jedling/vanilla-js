@@ -25,6 +25,8 @@ class App {
 
       if (e.target.closest(".edit"))
         this.editButton(e.target.getAttribute("data-contactid"));
+      if (e.target.closest("#update-contact"))
+        this.updateButton(e.target.getAttribute("data-contactid"));
     });
   }
   addPhone() {
@@ -54,10 +56,8 @@ class App {
     // let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
     document.querySelector("div.form").innerHTML = "";
     document.querySelector("div.added-contacts").innerHTML = "";
-    // let person = localStorage.getItem('contacts');
-    // console.log(person);
-    this.contact = new Contact(parseInt(id)).showContact();
-    console.log(id);
+   
+    this.contact = new Contact(Number(id));
   }
   deleteButton(id) {
     let contact = contacts.find(contact => {
@@ -67,17 +67,15 @@ class App {
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
     this.contacts = new Contacts();
-    console.log(contact);
-    console.log("ta bort mig");
+
   }
-  editButton(id){
-    // let header = document.createElement('h2');
-    // header.setAttribute('class', 'edit-header')
-    this.updateContact = new UpdateContact(Number(id)).updateForm();
-    console.log('uppdatera')
+  editButton(id) {
+    this.updateContact = new UpdateContact(Number(id));
   }
-  saveContact() {
-    // let inputValues = document.querySelectorAll('input[type="text"]');
+  updateButton(id) {
+    let contact = contacts.find(contact => {
+      return contact.id === Number(id);
+    });
     let inputName = document.querySelector("input#name").value;
     let inputPhone = document.querySelector("div.phone-div").children;
     let inputEmail = document.querySelector("div.email-div").children;
@@ -98,16 +96,49 @@ class App {
         return input.value;
       });
 
-    const data = {
+    contact.history.push({
       name: inputName,
       phone: filteredPhone,
-      email: filteredEmail,
-      id: Date.now(),
-      history: []
-    };
-
-    contacts.push(data);
+      email: filteredEmail
+    });
     console.log(contacts);
+    contacts.save();
+    this.contact = new Contact(Number(id));
+ 
+  }
+  saveContact() {
+    let inputName = document.querySelector("input#name").value;
+    let inputPhone = document.querySelector("div.phone-div").children;
+    let inputEmail = document.querySelector("div.email-div").children;
+
+    let filteredPhone = [].filter
+      .call(inputPhone, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    let filteredEmail = [].filter
+      .call(inputEmail, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    const contact = {
+      id: Date.now(),
+      version: 0,
+      history: [
+        {
+          name: inputName,
+          phone: filteredPhone,
+          email: filteredEmail
+        }
+      ]
+    };
+    contacts.push(contact);
     contacts.save();
 
     document.querySelector("div.form").outerHTML = "";

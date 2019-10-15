@@ -2,12 +2,13 @@ class Contact extends App {
   constructor(id) {
     super();
     this.id = id;
+    this.showContact();
   }
   showContact() {
-    let allContacts = JSON.parse(localStorage.getItem("contacts"));
-    let contact = allContacts.find(contact => {
+    let contact = contacts.find(contact => {
       return contact.id === this.id;
-    });
+    })
+    let version = contact.history[0]
 
     let div = document.createElement("div");
     div.setAttribute("class", "added-contacts");
@@ -43,13 +44,13 @@ class Contact extends App {
     
     tr = document.createElement("tr");
     let td = document.createElement("td");
-    td.innerText = contact.name;
+    td.innerText = version.name;
 
     let td2 = document.createElement("td");
-    td2.innerText = contact.email.join("\n");
+    td2.innerText = version.email.join("\n");
 
     let td3 = document.createElement("td");
-    td3.innerText = contact.phone.join("\n");
+    td3.innerText = version.phone.join("\n");
 
     let td4 = document.createElement("td");
     let edit = document.createElement("button");
