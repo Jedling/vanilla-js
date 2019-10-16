@@ -1,6 +1,5 @@
-class Contacts extends App {
+class Contacts {
   constructor() {
-    super();
     this.addedContacts();
   }
   addedContacts() {
@@ -43,13 +42,13 @@ class Contacts extends App {
       let tr = document.createElement("tr");
       let td = document.createElement("td");
       tr.setAttribute('class', 'tr-row')
-      td.innerText = contact.history[0].name ;
+      td.innerText = contact.history[contact.pointer].name ;
 
       let td2 = document.createElement("td");
-      td2.innerText = contact.history[0].email.join("\n");
+      td2.innerText = contact.history[contact.pointer].email.join("\n");
 
       let td3 = document.createElement("td");
-      td3.innerText = contact.history[0].phone.join("\n");
+      td3.innerText = contact.history[contact.pointer].phone.join("\n");
 
       let td4 = document.createElement("td");
       let view = document.createElement("button");
