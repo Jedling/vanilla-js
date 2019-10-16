@@ -20,7 +20,7 @@ class UpdateContact extends App {
     let inputName = document.createElement("input");
     inputName.setAttribute("class", "name-input");
     inputName.setAttribute("type", "text");
-    inputName.setAttribute("value", contact.history[0].name);
+    inputName.setAttribute("value", contact.history[contact.pointer].name);
     inputName.setAttribute("id", "name");
     inputName.setAttribute("autofocus", "");
     nameDiv.append(inputName);
@@ -33,7 +33,7 @@ class UpdateContact extends App {
     let inputPhone = document.createElement("input");
     inputPhone.setAttribute("class", "phone-input");
     inputPhone.setAttribute("type", "text");
-    inputPhone.setAttribute("value", contact.history[0].phone);
+    inputPhone.setAttribute("value", contact.history[contact.pointer].phone);
     inputPhone.setAttribute("id", "phone");
     phoneDiv.append(inputPhone);
     div.append(phoneDiv);
@@ -54,7 +54,7 @@ class UpdateContact extends App {
     let inputEmail = document.createElement("input");
     inputEmail.setAttribute("class", "email-input");
     inputEmail.setAttribute("type", "text");
-    inputEmail.setAttribute("value", contact.history[0].email);
+    inputEmail.setAttribute("value", contact.history[contact.pointer].email);
     inputEmail.setAttribute("id", "e-post");
     // inputEmail.setAttribute("placeholder", "e-post");
     // body.append(inputEmail);
