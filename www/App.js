@@ -7,7 +7,7 @@ class App {
 
     this.form = new Form();
     this.contacts = new Contacts();
-    this.contact = new Contact();
+    //this.contact = new Contact();
   }
   listen() {
     window.addEventListener("click", e => {
@@ -25,8 +25,12 @@ class App {
 
       if (e.target.closest(".edit"))
         this.editButton(e.target.getAttribute("data-contactid"));
+
       if (e.target.closest("#update-contact"))
-        this.updateButton(e.target.getAttribute("data-contactid"));
+        this.updateButton(e.target, e.target.getAttribute("data-contactid"));
+
+      if (e.target.closest(".undo-redo"))
+        this.undoRedo(e.target.getAttribute("data-contactid"));
     });
   }
   addPhone() {
@@ -35,7 +39,6 @@ class App {
     input.setAttribute("placeholder", "Telefon");
 
     let inputVal = document.querySelectorAll('input[type="text"]');
-    console.log(inputVal);
 
     phoneDiv.append(input);
     let br = document.createElement("br");
@@ -46,33 +49,30 @@ class App {
     const input = document.createElement("input");
     input.setAttribute("placeholder", "e-post");
     let inputVal = document.querySelectorAll('input[type="text"]');
-    console.log(inputVal);
 
     emailDiv.append(input);
     let br = document.createElement("br");
     emailDiv.append(br);
   }
   getContact(id) {
-    // let id = e.target.offsetParent.parentNode.getAttribute("data-contact");
     document.querySelector("div.form").innerHTML = "";
     document.querySelector("div.added-contacts").innerHTML = "";
-   
+
     this.contact = new Contact(Number(id));
   }
   deleteButton(id) {
-    let contact = contacts.find(contact => {
-      return contact.id === Number(id);
-    });
+    // let contact = contacts.find(contact => {
+    //   return contact.id === Number(id);
+    // });
     contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
     this.contacts = new Contacts();
-
   }
   editButton(id) {
     this.updateContact = new UpdateContact(Number(id));
   }
-  updateButton(id) {
+  updateButton(btn, id) {
     let contact = contacts.find(contact => {
       return contact.id === Number(id);
     });
@@ -96,14 +96,26 @@ class App {
         return input.value;
       });
 
+    // Remove all elements after the pointer
+    contact.history.length = contact.pointer + 1;
+    // Push new state to history
     contact.history.push({
       name: inputName,
       phone: filteredPhone,
-      email: filteredEmail,
+      email: filteredEmail
     });
+    // Update the pointer
+    contact.pointer++;
+    // save to local storage
     contacts.save();
-    this.contact = new Contact()
- 
+    // update screen
+    new Contact(contact.id);
+    // remove editing form
+    btn.closest(".form").remove();
+  }
+  undoRedo() {
+    console.log('UndoRedo');
+
   }
   saveContact() {
     let inputName = document.querySelector("input#name").value;
@@ -128,7 +140,7 @@ class App {
 
     const contact = {
       id: Date.now(),
-      version: 0,
+      pointer: 0,
       history: [
         {
           name: inputName,
