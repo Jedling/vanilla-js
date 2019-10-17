@@ -1,7 +1,5 @@
 class App {
-  constructor() {
-    // kolla upp diff mellan arrayer ?!
-  }
+  constructor() {}
   createDOM() {
     this.listen();
 
@@ -29,16 +27,25 @@ class App {
       if (e.target.closest("#update-contact"))
         this.updateButton(e.target, e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest(".undo-redo"))
-        this.undoRedo(e.target.getAttribute("data-contactid"));
+      if (e.target.closest(".reset"))
+        this.resetContact(
+          e.target.getAttribute("data-id"),
+          e.target.getAttribute("data-index")
+        );
+
+      // if (e.target.closest(".undo-redo"))
+      //   this.resetContact(e.target.getAttribute("data-contactid"));
+
+      if (e.target.closest(".back")) this.goBackButton();
     });
   }
   addPhone() {
     const phoneDiv = document.querySelector("div.phone-div");
     const input = document.createElement("input");
     input.setAttribute("placeholder", "Telefon");
+    input.setAttribute('class', 'phone-input');
 
-    let inputVal = document.querySelectorAll('input[type="text"]');
+    // let inputVal = document.querySelectorAll('input[type="text"]');
 
     phoneDiv.append(input);
     let br = document.createElement("br");
@@ -47,8 +54,9 @@ class App {
   addEmail() {
     const emailDiv = document.querySelector("div.email-div");
     const input = document.createElement("input");
+    input.setAttribute('class', 'email-input');
     input.setAttribute("placeholder", "e-post");
-    let inputVal = document.querySelectorAll('input[type="text"]');
+    // let inputVal = document.querySelectorAll('input[type="text"]');
 
     emailDiv.append(input);
     let br = document.createElement("br");
@@ -61,9 +69,6 @@ class App {
     this.contact = new Contact(Number(id));
   }
   deleteButton(id) {
-    // let contact = contacts.find(contact => {
-    //   return contact.id === Number(id);
-    // });
     contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
@@ -79,6 +84,7 @@ class App {
     let inputName = document.querySelector("input#name").value;
     let inputPhone = document.querySelector("div.phone-div").children;
     let inputEmail = document.querySelector("div.email-div").children;
+    let adjusted = new Date().toLocaleString();
 
     let filteredPhone = [].filter
       .call(inputPhone, element => {
@@ -102,7 +108,8 @@ class App {
     contact.history.push({
       name: inputName,
       phone: filteredPhone,
-      email: filteredEmail
+      email: filteredEmail,
+      time: adjusted
     });
     // Update the pointer
     contact.pointer++;
@@ -113,15 +120,26 @@ class App {
     // remove editing form
     btn.closest(".form").remove();
   }
-  undoRedo() {
-    console.log('UndoRedo');
-
+  goBackButton() {
+    window.location = "http://localhost:3000";
   }
+  resetContact(id, index) {
+    let contact = contacts.find(contact => {
+      return contact.id === Number(id);
+    });
+    let resetPoint = contact.history.splice(index, 1)[0];
+    console.log(resetPoint);
+    contact.history.push(resetPoint);
+    contacts.save();
+    this.contact = new Contact(contact.id);
+    console.log("undo or redo thats it the schnitzel");
+  }
+
   saveContact() {
     let inputName = document.querySelector("input#name").value;
     let inputPhone = document.querySelector("div.phone-div").children;
     let inputEmail = document.querySelector("div.email-div").children;
-
+    let added = new Date().toLocaleString();
     let filteredPhone = [].filter
       .call(inputPhone, element => {
         return element.tagName === "INPUT";
@@ -145,7 +163,8 @@ class App {
         {
           name: inputName,
           phone: filteredPhone,
-          email: filteredEmail
+          email: filteredEmail,
+          time: added
         }
       ]
     };
