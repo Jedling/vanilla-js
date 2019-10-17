@@ -1,0 +1,89 @@
+.added-contact {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.history {
+  margin-top: 20px;
+}
+.time {
+  font-weight: 700;
+}
+.edit,
+.reset,
+.view-contact {
+  background-color: pink;
+  border-radius: 5px;
+  color: grey;
+  font-family: verdana;
+  cursor: pointer;
+  vertical-align: top;
+  height: 40px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.remove-contact{
+  background-color: pink;
+  border-radius: 5px;
+  color: grey;
+  font-family: verdana;
+  cursor: pointer;
+  vertical-align: top;
+  height: 40px;
+  width: 45px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+/* .view-contact:hover,
+.remove-contact:hover,
+.reset:hover,
+.edit:hover {
+  background-color: rgb(253, 143, 161);
+} */
+.history-header, .contact-header {
+  font-size: 1.6rem;
+  color: grey;
+  font-family: verdana;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.contact-header {
+  margin-top: 25px;
+}
+table {
+  /* border: 2px solid rgb(255, 155, 171); */
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 700px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+/* .tr-row {
+  background-color: rgb(253, 247, 247);
+} */
+tbody > tr {
+  background-color: rgb(253, 247, 247)
+}
+thead {
+  background-color: pink;
+  padding: 20px;
+  border-bottom: 1px solid palevioletred;
+  text-align: left;
+  color: grey;
+  font-family: verdana;
+  border-radius: 5px;
+}
+th {
+  padding: 20px 5px;
+}
+tbody > tr:hover {
+  padding: 20px;
+  background-color: rgb(231, 228, 228);
+}
+
+td {
+  padding: 5px;
+  color: grey;
+  /* background-color: rgb(231, 228, 228); */
+}
