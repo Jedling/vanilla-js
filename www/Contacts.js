@@ -17,7 +17,7 @@ class Contacts {
     th.innerText = "Namn";
 
     let th2 = document.createElement("th");
-    th2.innerText = "Email";
+    th2.innerText = "Epost";
     
     let th3 = document.createElement("th");
     th3.innerText = "Telefon";
