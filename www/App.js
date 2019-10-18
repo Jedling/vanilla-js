@@ -70,6 +70,7 @@ class App {
   }
   deleteButton(id) {
     contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
+    alert('vill du ta bort?')
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
     this.contacts = new Contacts();
@@ -121,7 +122,11 @@ class App {
     btn.closest(".form").remove();
   }
   goBackButton() {
-    window.location = "http://localhost:3000";
+    // window.location = "http://localhost:3000";
+    document.querySelector("div.added-contact").outerHTML = "";
+    document.querySelector("div.history").outerHTML = "";
+    this.form = new Form();
+    this.contacts = new Contacts();
   }
   resetContact(id, index) {
     let contact = contacts.find(contact => {
@@ -132,7 +137,6 @@ class App {
     contact.history.push(resetPoint);
     contacts.save();
     this.contact = new Contact(contact.id);
-    console.log("undo or redo thats it the schnitzel");
   }
 
   saveContact() {
