@@ -1,79 +1,110 @@
 class App {
-  constructor() {}
+  constructor() {
+    this.listen = (() => {
+ 
+      let listeningOnType = {};
+      let listeners = [];
+     
+      function listen(eventType, cssSelector, func){
+        // Register a "listener"
+        let listener = {eventType, cssSelector, func};
+        listeners.push(listener);
+        // If no listener on window[eventType] register a 
+        // a real/raw js-listener
+        if(!listeningOnType[eventType]){
+          // add event listener for this type on the whole window
+          window.addEventListener(eventType, e => {
+            listeners
+              .filter(x => x.eventType === eventType)
+              .forEach(listener => {
+                if(e.target.closest(listener.cssSelector)){
+                  listener.func(e);
+                }
+            });
+          });
+          listeningOnType[eventType] = true;
+        }
+        return listener;
+      }
+     
+      return listen;
+     
+    })();
+  }
   createDOM() {
-    this.listen();
+    // this.listen();
 
     this.form = new Form();
     this.contacts = new Contacts();
     //this.contact = new Contact();
   }
-  listen() {
-    window.addEventListener("click", e => {
-      if (e.target.closest("#save-contact")) this.saveContact();
+  // listen() {
+  //   window.addEventListener("click", e => {
+  //     if (e.target.closest("#save-contact")) this.saveContact();
 
-      if (e.target.closest(".add-phone")) this.addPhone();
+  //     if (e.target.closest(".add-phone")) this.addPhone();
 
-      if (e.target.closest(".add-email")) this.addEmail();
+  //     if (e.target.closest(".add-email")) this.addEmail();
 
-      if (e.target.closest(".view-contact"))
-        this.getContact(e.target.getAttribute("data-contactid"));
+  //     if (e.target.closest(".view-contact"))
+  //       this.getContact(e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest(".remove-contact"))
-        this.deleteButton(e.target.getAttribute("data-contactid"));
+  //     if (e.target.closest(".remove-contact"))
+  //       this.deleteButton(e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest(".edit"))
-        this.editButton(e.target.getAttribute("data-contactid"));
+  //     if (e.target.closest(".edit"))
+  //       this.editButton(e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest("#update-contact"))
-        this.updateButton(e.target, e.target.getAttribute("data-contactid"));
+  //     if (e.target.closest("#update-contact"))
+  //       this.updateButton(e.target, e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest(".reset"))
-        this.resetContact(
-          e.target.getAttribute("data-id"),
-          e.target.getAttribute("data-index")
-        );
+  //     if (e.target.closest(".reset"))
+  //       this.resetContact(
+  //         e.target.getAttribute("data-id"),
+  //         e.target.getAttribute("data-index")
+  //       );
 
-      // if (e.target.closest(".undo-redo"))
-      //   this.resetContact(e.target.getAttribute("data-contactid"));
+  //     // if (e.target.closest(".undo-redo"))
+  //     //   this.resetContact(e.target.getAttribute("data-contactid"));
 
-      if (e.target.closest(".back")) this.goBackButton();
-    });
-  }
-  addPhone() {
-    const phoneDiv = document.querySelector("div.phone-div");
-    const input = document.createElement("input");
-    input.setAttribute("placeholder", "Telefon");
-    input.setAttribute('class', 'phone-input');
+  //     if (e.target.closest(".back")) this.goBackButton();
+  //   });
+  // }
+  // addPhone() {
+  //   const phoneDiv = document.querySelector("div.phone-div");
+  //   const input = document.createElement("input");
+  //   input.setAttribute("placeholder", "Telefon");
+  //   input.setAttribute('class', 'phone-input');
 
-    // let inputVal = document.querySelectorAll('input[type="text"]');
+  //   // let inputVal = document.querySelectorAll('input[type="text"]');
 
-    phoneDiv.append(input);
-    let br = document.createElement("br");
-    phoneDiv.append(br);
-  }
-  addEmail() {
-    const emailDiv = document.querySelector("div.email-div");
-    const input = document.createElement("input");
-    input.setAttribute('class', 'email-input');
-    input.setAttribute("placeholder", "e-post");
-    // let inputVal = document.querySelectorAll('input[type="text"]');
+  //   phoneDiv.append(input);
+  //   let br = document.createElement("br");
+  //   phoneDiv.append(br);
+  // }
+  // addEmail() {
+  //   const emailDiv = document.querySelector("div.email-div");
+  //   const input = document.createElement("input");
+  //   input.setAttribute('class', 'email-input');
+  //   input.setAttribute("placeholder", "e-post");
+  //   // let inputVal = document.querySelectorAll('input[type="text"]');
 
-    emailDiv.append(input);
-    let br = document.createElement("br");
-    emailDiv.append(br);
-  }
-  getContact(id) {
-    document.querySelector("div.form").innerHTML = "";
-    document.querySelector("div.added-contacts").innerHTML = "";
+  //   emailDiv.append(input);
+  //   let br = document.createElement("br");
+  //   emailDiv.append(br);
+  // }
+  // getContact(id) {
+  //   document.querySelector("div.form").innerHTML = "";
+  //   document.querySelector("div.added-contacts").innerHTML = "";
 
-    this.contact = new Contact(Number(id));
-  }
-  deleteButton(id) {
-    contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
-    contacts.save();
-    document.querySelector("div.added-contacts").outerHTML = "";
-    this.contacts = new Contacts();
-  }
+  //   this.contact = new Contact(Number(id));
+  // }
+  // deleteButton(id) {
+  //   contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
+  //   contacts.save();
+  //   document.querySelector("div.added-contacts").outerHTML = "";
+  //   this.contacts = new Contacts();
+  // }
   editButton(id) {
     this.updateContact = new UpdateContact(Number(id));
   }
@@ -135,45 +166,45 @@ class App {
     console.log("undo or redo thats it the schnitzel");
   }
 
-  saveContact() {
-    let inputName = document.querySelector("input#name").value;
-    let inputPhone = document.querySelector("div.phone-div").children;
-    let inputEmail = document.querySelector("div.email-div").children;
-    let added = new Date().toLocaleString();
-    let filteredPhone = [].filter
-      .call(inputPhone, element => {
-        return element.tagName === "INPUT";
-      })
-      .map(input => {
-        return input.value;
-      });
+  // saveContact() {
+  //   let inputName = document.querySelector("input#name").value;
+  //   let inputPhone = document.querySelector("div.phone-div").children;
+  //   let inputEmail = document.querySelector("div.email-div").children;
+  //   let added = new Date().toLocaleString();
+  //   let filteredPhone = [].filter
+  //     .call(inputPhone, element => {
+  //       return element.tagName === "INPUT";
+  //     })
+  //     .map(input => {
+  //       return input.value;
+  //     });
 
-    let filteredEmail = [].filter
-      .call(inputEmail, element => {
-        return element.tagName === "INPUT";
-      })
-      .map(input => {
-        return input.value;
-      });
+  //   let filteredEmail = [].filter
+  //     .call(inputEmail, element => {
+  //       return element.tagName === "INPUT";
+  //     })
+  //     .map(input => {
+  //       return input.value;
+  //     });
 
-    const contact = {
-      id: Date.now(),
-      pointer: 0,
-      history: [
-        {
-          name: inputName,
-          phone: filteredPhone,
-          email: filteredEmail,
-          time: added
-        }
-      ]
-    };
-    contacts.push(contact);
-    contacts.save();
+  //   const contact = {
+  //     id: Date.now(),
+  //     pointer: 0,
+  //     history: [
+  //       {
+  //         name: inputName,
+  //         phone: filteredPhone,
+  //         email: filteredEmail,
+  //         time: added
+  //       }
+  //     ]
+  //   };
+  //   contacts.push(contact);
+  //   contacts.save();
 
-    document.querySelector("div.form").outerHTML = "";
-    this.form = new Form();
-    document.querySelector("div.added-contacts").outerHTML = "";
-    this.contacts = new Contacts();
-  }
+  //   document.querySelector("div.form").outerHTML = "";
+  //   this.form = new Form();
+  //   document.querySelector("div.added-contacts").outerHTML = "";
+  //   this.contacts = new Contacts();
+  // }
 }

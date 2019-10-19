@@ -1,6 +1,7 @@
 class Contacts {
   constructor() {
     this.addedContacts();
+    // this.listen = ('click')
   }
   addedContacts() {
     let div = document.createElement("div");

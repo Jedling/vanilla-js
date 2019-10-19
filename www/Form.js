@@ -1,6 +1,11 @@
 class Form extends App {
   constructor() {
     super();
+    this.listen('click', '.add-phone', e => {this.addPhone(e.target)});
+    this.listen('click','.add-email', e => {this.addEmail(e.target)});
+    this.listen('click', '#save-contact', e => {this.saveContact(e.target)});
+    this.listen('click', '.view-contact', e => {this.viewContact(e.target.getAttribute("data-contactid"))});
+    this.listen('click', '.remove-contact', e => {this.deleteButton(e.target.getAttribute("data-contactid"))});
     this.addForm();
   }
   addForm() {
@@ -95,5 +100,81 @@ class Form extends App {
     // let ul = document.createElement("ul");
     // ul.setAttribute("class", "contact-ul");
     // div.append(ul);
+  }
+  addPhone() {
+    const phoneDiv = document.querySelector("div.phone-div");
+    const input = document.createElement("input");
+    input.setAttribute("placeholder", "Telefon");
+    input.setAttribute('class', 'phone-input');
+
+    // let inputVal = document.querySelectorAll('input[type="text"]');
+
+    phoneDiv.append(input);
+    let br = document.createElement("br");
+    phoneDiv.append(br);
+  }
+  addEmail() {
+    const emailDiv = document.querySelector("div.email-div");
+    const input = document.createElement("input");
+    input.setAttribute('class', 'email-input');
+    input.setAttribute("placeholder", "e-post");
+    // let inputVal = document.querySelectorAll('input[type="text"]');
+
+    emailDiv.append(input);
+    let br = document.createElement("br");
+    emailDiv.append(br);
+  }
+  viewContact(id) {
+    document.querySelector("div.form").innerHTML = "";
+    document.querySelector("div.added-contacts").innerHTML = "";
+
+    this.contact = new Contact(Number(id));
+  }
+  deleteButton(id) {
+    contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
+    contacts.save();
+    document.querySelector("div.added-contacts").outerHTML = "";
+    this.contacts = new Contacts();
+  }
+  saveContact() {
+    let inputName = document.querySelector("input#name").value;
+    let inputPhone = document.querySelector("div.phone-div").children;
+    let inputEmail = document.querySelector("div.email-div").children;
+    let added = new Date().toLocaleString();
+    let filteredPhone = [].filter
+      .call(inputPhone, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    let filteredEmail = [].filter
+      .call(inputEmail, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    const contact = {
+      id: Date.now(),
+      pointer: 0,
+      history: [
+        {
+          name: inputName,
+          phone: filteredPhone,
+          email: filteredEmail,
+          time: added
+        }
+      ]
+    };
+    contacts.push(contact);
+    contacts.save();
+
+    document.querySelector("div.form").outerHTML = "";
+    this.form = new Form();
+    document.querySelector("div.added-contacts").outerHTML = "";
+    this.contacts = new Contacts();
   }
 }
