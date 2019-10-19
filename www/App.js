@@ -122,11 +122,11 @@ class App {
     btn.closest(".form").remove();
   }
   goBackButton() {
-    // window.location = "http://localhost:3000";
-    document.querySelector("div.added-contact").outerHTML = "";
-    document.querySelector("div.history").outerHTML = "";
-    this.form = new Form();
-    this.contacts = new Contacts();
+    window.location = "http://localhost:3000";
+    // document.querySelector("div.added-contact").outerHTML = "";
+    // document.querySelector("div.history").outerHTML = "";
+    // this.form = new Form();
+    // this.contacts = new Contacts();
   }
   resetContact(id, index) {
     let contact = contacts.find(contact => {
