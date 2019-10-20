@@ -2,10 +2,8 @@ class App {
   constructor() {}
   createDOM() {
     this.listen();
-
     this.form = new Form();
     this.contacts = new Contacts();
-    //this.contact = new Contact();
   }
   listen() {
     window.addEventListener("click", e => {
@@ -32,10 +30,6 @@ class App {
           e.target.getAttribute("data-id"),
           e.target.getAttribute("data-index")
         );
-
-      // if (e.target.closest(".undo-redo"))
-      //   this.resetContact(e.target.getAttribute("data-contactid"));
-
       if (e.target.closest(".back")) this.goBackButton();
     });
   }
@@ -44,9 +38,6 @@ class App {
     const input = document.createElement("input");
     input.setAttribute("placeholder", "Telefon");
     input.setAttribute('class', 'phone-input');
-
-    // let inputVal = document.querySelectorAll('input[type="text"]');
-
     phoneDiv.append(input);
     let br = document.createElement("br");
     phoneDiv.append(br);
@@ -56,8 +47,6 @@ class App {
     const input = document.createElement("input");
     input.setAttribute('class', 'email-input');
     input.setAttribute("placeholder", "e-post");
-    // let inputVal = document.querySelectorAll('input[type="text"]');
-
     emailDiv.append(input);
     let br = document.createElement("br");
     emailDiv.append(br);
@@ -65,12 +54,10 @@ class App {
   getContact(id) {
     document.querySelector("div.form").innerHTML = "";
     document.querySelector("div.added-contacts").innerHTML = "";
-
     this.contact = new Contact(Number(id));
   }
   deleteButton(id) {
     contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
-    alert('vill du ta bort?')
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
     this.contacts = new Contacts();
@@ -123,10 +110,6 @@ class App {
   }
   goBackButton() {
     window.location = "http://localhost:3000";
-    // document.querySelector("div.added-contact").outerHTML = "";
-    // document.querySelector("div.history").outerHTML = "";
-    // this.form = new Form();
-    // this.contacts = new Contacts();
   }
   resetContact(id, index) {
     let contact = contacts.find(contact => {
@@ -138,7 +121,6 @@ class App {
     contacts.save();
     this.contact = new Contact(contact.id);
   }
-
   saveContact() {
     let inputName = document.querySelector("input#name").value;
     let inputPhone = document.querySelector("div.phone-div").children;

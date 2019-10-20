@@ -7,12 +7,7 @@ class Form extends App {
     let div = document.createElement("div");
     div.setAttribute('class', 'form');
     let body = document.querySelector("body");
-    
-    // Header
-    // let headerDiv = document.createElement("div");
-    // headerDiv.setAttribute("class", "header");
-    // headerDiv.innerHTML = "Kontakter";
-    // div.append(headerDiv);
+  
     body.append(div);
     let h2 = document.createElement('h2');
     h2.setAttribute('class', 'contact-header')
@@ -29,7 +24,6 @@ class Form extends App {
     inputName.setAttribute("id", "name");
     inputName.setAttribute("autofocus", "");
     inputName.setAttribute("placeholder", "namn");
-    // body.append(inputName);
     nameDiv.append(inputName);
     div.append(nameDiv);
 
@@ -43,7 +37,6 @@ class Form extends App {
     inputPhone.setAttribute("value", "");
     inputPhone.setAttribute("id", "phone");
     inputPhone.setAttribute("placeholder", "telefon");
-    // body.append(inputPhone);
     phoneDiv.append(inputPhone);
     div.append(phoneDiv);
 
@@ -86,14 +79,5 @@ class Form extends App {
     submit.setAttribute("id", "save-contact");
     submit.innerHTML = "Lägg till kontakt";
     div.append(submit);
-
-    // let addedContacts = document.createElement("h2");
-    // addedContacts.setAttribute("class", "added-contacts");
-    // addedContacts.innerHTML = "Osorterad kontaktlista!";
-    // div.append(addedContacts);
-
-    // let ul = document.createElement("ul");
-    // ul.setAttribute("class", "contact-ul");
-    // div.append(ul);
   }
 }

@@ -56,8 +56,6 @@ class UpdateContact extends App {
     inputEmail.setAttribute("type", "text");
     inputEmail.setAttribute("value", contact.history[contact.pointer].email);
     inputEmail.setAttribute("id", "e-post");
-    // inputEmail.setAttribute("placeholder", "e-post");
-    // body.append(inputEmail);
     emailDiv.append(inputEmail);
     div.append(emailDiv);
 
@@ -78,7 +76,5 @@ class UpdateContact extends App {
     update.setAttribute('data-contactid', contact.id)
     update.innerHTML = "Uppdatera";
     div.append(update);
-
   }
-
 }
