@@ -1,28 +1,53 @@
 class Form extends App {
   constructor() {
     super();
-    this.listen('click', '.add-phone', e => {this.addPhone(e.target)});
-    this.listen('click','.add-email', e => {this.addEmail(e.target)});
-    this.listen('click', '#save-contact', e => {this.saveContact(e.target)});
-    this.listen('click', '.view-contact', e => {this.viewContact(e.target.getAttribute("data-contactid"))});
-    this.listen('click', '.remove-contact', e => {this.deleteButton(e.target.getAttribute("data-contactid"))});
     this.addForm();
+    this.listen("click", ".add-phone", e => {
+      this.addPhone(e.target);
+    });
+    this.listen("click", ".add-email", e => {
+      this.addEmail(e.target);
+    });
+    this.listen("click", "#save-contact", e => {
+      this.saveContact(e.target);
+    });
+    this.listen("click", ".view-contact", e => {
+      this.viewContact(e.target.getAttribute("data-contactid"));
+    });
+    this.listen("click", ".remove-contact", e => {
+      this.deleteButton(e.target.getAttribute("data-contactid"));
+    });
+    this.listen("click", ".back", e => {
+      this.goBackButton(e.target);
+    });
+    this.listen("click", "#update-contact", e => {
+      this.updateButton(e.target, e.target.getAttribute("data-contactid"));
+    });
+    this.listen("click", ".edit", e => {
+      this.editButton(e.target.getAttribute("data-contactid"));
+    });
+    this.listen("click", ".reset", e => {
+      this.resetContact(
+        e.target.getAttribute("data-id"),
+        e.target.getAttribute("data-index")
+      );
+    });
   }
   addForm() {
     let div = document.createElement("div");
-    div.setAttribute('class', 'form');
+    div.setAttribute("class", "form");
     let body = document.querySelector("body");
-    
+
     // Header
     // let headerDiv = document.createElement("div");
     // headerDiv.setAttribute("class", "header");
     // headerDiv.innerHTML = "Kontakter";
     // div.append(headerDiv);
     body.append(div);
-    let h2 = document.createElement('h2');
-    h2.setAttribute('class', 'contact-header')
-    h2.innerText = 'Kontaktlista'
-    div.append(h2)
+    let h2 = document.createElement("h2");
+    h2.setAttribute("class", "contact-header");
+    h2.innerText = "Kontaktlista";
+    div.append(h2);
 
     // Name input
     const nameDiv = document.createElement("div");
@@ -41,7 +66,7 @@ class Form extends App {
     // Phone
     const phoneDiv = document.createElement("div");
     phoneDiv.setAttribute("class", "phone-div input-div");
-    phoneDiv.setAttribute("type", 'text');
+    phoneDiv.setAttribute("type", "text");
     let inputPhone = document.createElement("input");
     inputPhone.setAttribute("class", "phone-input");
     inputPhone.setAttribute("type", "text");
@@ -58,8 +83,8 @@ class Form extends App {
     addPhone.setAttribute("value", "");
     addPhone.innerHTML = "+";
     phoneDiv.append(addPhone);
-    let br = document.createElement('br')
-    phoneDiv.append(br)
+    let br = document.createElement("br");
+    phoneDiv.append(br);
     div.append(phoneDiv);
 
     // Email
@@ -81,8 +106,8 @@ class Form extends App {
     addEmail.setAttribute("type", "text");
     addEmail.innerHTML = "+";
     emailDiv.append(addEmail);
-    let br2 = document.createElement('br');
-    emailDiv.append(br2)
+    let br2 = document.createElement("br");
+    emailDiv.append(br2);
     div.append(emailDiv);
 
     // Submit
@@ -105,7 +130,7 @@ class Form extends App {
     const phoneDiv = document.querySelector("div.phone-div");
     const input = document.createElement("input");
     input.setAttribute("placeholder", "Telefon");
-    input.setAttribute('class', 'phone-input');
+    input.setAttribute("class", "phone-input");
 
     // let inputVal = document.querySelectorAll('input[type="text"]');
 
@@ -116,7 +141,7 @@ class Form extends App {
   addEmail() {
     const emailDiv = document.querySelector("div.email-div");
     const input = document.createElement("input");
-    input.setAttribute('class', 'email-input');
+    input.setAttribute("class", "email-input");
     input.setAttribute("placeholder", "e-post");
     // let inputVal = document.querySelectorAll('input[type="text"]');
 
@@ -130,11 +155,71 @@ class Form extends App {
 
     this.contact = new Contact(Number(id));
   }
+  editButton(id) {
+    this.updateContact = new UpdateContact(Number(id));
+  }
   deleteButton(id) {
     contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
     contacts.save();
     document.querySelector("div.added-contacts").outerHTML = "";
     this.contacts = new Contacts();
+  }
+  goBackButton() {
+    window.location = "http://localhost:3000";
+  }
+  resetContact(id, index) {
+    let contact = contacts.find(contact => {
+      return contact.id === Number(id);
+    });
+    let resetPoint = contact.history.splice(index, 1)[0];
+    console.log(resetPoint);
+    contact.history.push(resetPoint);
+    contacts.save();
+    this.contact = new Contact(contact.id);
+    console.log("undo or redo thats it the schnitzel");
+  }
+  updateButton(btn, id) {
+    let contact = contacts.find(contact => {
+      return contact.id === Number(id);
+    });
+    let inputName = document.querySelector("input#name").value;
+    let inputPhone = document.querySelector("div.phone-div").children;
+    let inputEmail = document.querySelector("div.email-div").children;
+    let adjusted = new Date().toLocaleString();
+
+    let filteredPhone = [].filter
+      .call(inputPhone, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    let filteredEmail = [].filter
+      .call(inputEmail, element => {
+        return element.tagName === "INPUT";
+      })
+      .map(input => {
+        return input.value;
+      });
+
+    // Remove all elements after the pointer
+    contact.history.length = contact.pointer + 1;
+    // Push new state to history
+    contact.history.push({
+      name: inputName,
+      phone: filteredPhone,
+      email: filteredEmail,
+      time: adjusted
+    });
+    // Update the pointer
+    contact.pointer++;
+    // save to local storage
+    contacts.save();
+    // update screen
+    new Contact(contact.id);
+    // remove editing form
+    btn.closest(".form").remove();
   }
   saveContact() {
     let inputName = document.querySelector("input#name").value;

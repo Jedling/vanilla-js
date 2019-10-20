@@ -1,10 +1,10 @@
 class Contact {
   constructor(id) {
+    
     this.id = id;
     this.showContact();
     this.showHistory();
   }
-
   showContact() {
     let contact = contacts.find(contact => {
       return contact.id === this.id;
@@ -86,7 +86,6 @@ class Contact {
     table.append(tbody);
     div.append(table);
   }
-  
   showHistory() {
     let contact = contacts.find(contact => {
       return contact.id === this.id;

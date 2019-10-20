@@ -26,9 +26,7 @@ class App {
         }
         return listener;
       }
-     
       return listen;
-     
     })();
   }
   createDOM() {
@@ -105,66 +103,66 @@ class App {
   //   document.querySelector("div.added-contacts").outerHTML = "";
   //   this.contacts = new Contacts();
   // }
-  editButton(id) {
-    this.updateContact = new UpdateContact(Number(id));
-  }
-  updateButton(btn, id) {
-    let contact = contacts.find(contact => {
-      return contact.id === Number(id);
-    });
-    let inputName = document.querySelector("input#name").value;
-    let inputPhone = document.querySelector("div.phone-div").children;
-    let inputEmail = document.querySelector("div.email-div").children;
-    let adjusted = new Date().toLocaleString();
+  // editButton(id) {
+  //   this.updateContact = new UpdateContact(Number(id));
+  // }
+  // updateButton(btn, id) {
+  //   let contact = contacts.find(contact => {
+  //     return contact.id === Number(id);
+  //   });
+  //   let inputName = document.querySelector("input#name").value;
+  //   let inputPhone = document.querySelector("div.phone-div").children;
+  //   let inputEmail = document.querySelector("div.email-div").children;
+  //   let adjusted = new Date().toLocaleString();
 
-    let filteredPhone = [].filter
-      .call(inputPhone, element => {
-        return element.tagName === "INPUT";
-      })
-      .map(input => {
-        return input.value;
-      });
+  //   let filteredPhone = [].filter
+  //     .call(inputPhone, element => {
+  //       return element.tagName === "INPUT";
+  //     })
+  //     .map(input => {
+  //       return input.value;
+  //     });
 
-    let filteredEmail = [].filter
-      .call(inputEmail, element => {
-        return element.tagName === "INPUT";
-      })
-      .map(input => {
-        return input.value;
-      });
+  //   let filteredEmail = [].filter
+  //     .call(inputEmail, element => {
+  //       return element.tagName === "INPUT";
+  //     })
+  //     .map(input => {
+  //       return input.value;
+  //     });
 
-    // Remove all elements after the pointer
-    contact.history.length = contact.pointer + 1;
-    // Push new state to history
-    contact.history.push({
-      name: inputName,
-      phone: filteredPhone,
-      email: filteredEmail,
-      time: adjusted
-    });
-    // Update the pointer
-    contact.pointer++;
-    // save to local storage
-    contacts.save();
-    // update screen
-    new Contact(contact.id);
-    // remove editing form
-    btn.closest(".form").remove();
-  }
-  goBackButton() {
-    window.location = "http://localhost:3000";
-  }
-  resetContact(id, index) {
-    let contact = contacts.find(contact => {
-      return contact.id === Number(id);
-    });
-    let resetPoint = contact.history.splice(index, 1)[0];
-    console.log(resetPoint);
-    contact.history.push(resetPoint);
-    contacts.save();
-    this.contact = new Contact(contact.id);
-    console.log("undo or redo thats it the schnitzel");
-  }
+  //   // Remove all elements after the pointer
+  //   contact.history.length = contact.pointer + 1;
+  //   // Push new state to history
+  //   contact.history.push({
+  //     name: inputName,
+  //     phone: filteredPhone,
+  //     email: filteredEmail,
+  //     time: adjusted
+  //   });
+  //   // Update the pointer
+  //   contact.pointer++;
+  //   // save to local storage
+  //   contacts.save();
+  //   // update screen
+  //   new Contact(contact.id);
+  //   // remove editing form
+  //   btn.closest(".form").remove();
+  // }
+  // goBackButton() {
+  //   window.location = "http://localhost:3000";
+  // }
+  // resetContact(id, index) {
+  //   let contact = contacts.find(contact => {
+  //     return contact.id === Number(id);
+  //   });
+  //   let resetPoint = contact.history.splice(index, 1)[0];
+  //   console.log(resetPoint);
+  //   contact.history.push(resetPoint);
+  //   contacts.save();
+  //   this.contact = new Contact(contact.id);
+  //   console.log("undo or redo thats it the schnitzel");
+  // }
 
   // saveContact() {
   //   let inputName = document.querySelector("input#name").value;

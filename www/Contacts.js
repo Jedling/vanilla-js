@@ -1,8 +1,15 @@
-class Contacts {
+class Contacts extends App{
   constructor() {
+    super()
     this.addedContacts();
-    // this.listen = ('click')
+    // this.listen('click', '.remove-contact', e => {this.deleteButton(e.target.getAttribute("data-contactid"))});  
   }
+  // deleteButton(id) {
+  //   contacts.splice(contacts.findIndex(contact => contact.id === +id), 1);
+  //   contacts.save();
+  //   document.querySelector("div.added-contacts").outerHTML = "";
+  //   this.contacts = new Contacts();
+  // }
   addedContacts() {
     let div = document.createElement("div");
     div.setAttribute("class", "added-contacts");
@@ -77,4 +84,5 @@ class Contacts {
     table.append(tbody);
     div.append(table);
   }
+ 
 }
