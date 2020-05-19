@@ -26,7 +26,6 @@ class Form extends App {
     inputName.setAttribute("placeholder", "namn");
     nameDiv.append(inputName);
     div.append(nameDiv);
-    
 
     // Phone
     const phoneDiv = document.createElement("div");
@@ -80,11 +79,5 @@ class Form extends App {
     submit.setAttribute("id", "save-contact");
     submit.innerHTML = "Lägg till kontakt";
     div.append(submit);
-
-    let korv = document.createElement("button");
-    submit.setAttribute("class", "submit-btn");
-    submit.setAttribute("id", "save-contact");
-    submit.innerHTML = "Lägg till kontakt";
-    div.append(korv);
   }
 }
